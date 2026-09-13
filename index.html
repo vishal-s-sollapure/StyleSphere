@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StyleSphere - Modern Fashion E-commerce</title>
+    <meta name="description" content="Discover your unique style at StyleSphere. Shop the latest trends in fashion with premium quality clothing, shoes, and accessories.">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Header Navbar -->
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="#" class="logo" onclick="showPage('home'); return false;">
+                    <span class="logo-icon">
+                        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+                            <line x1="3" y1="6" x2="21" y2="6" />
+                            <path d="M16 10a4 4 0 01-8 0" />
+                        </svg>
+                    </span>
+                    StyleSphere
+                </a>
+
+                <nav class="nav">
+                    <a href="#" class="nav-link" id="nav-shop" onclick="showPage('shop'); return false;">Shop</a>
+                    <a href="#" class="nav-link" id="nav-new" onclick="showPage('shop', 'new'); return false;">New Arrivals</a>
+                    <a href="#" class="nav-link" id="nav-sale" onclick="showPage('shop', 'sale'); return false;">Sale</a>
+                </nav>
+
+                <div class="search-wrapper">
+                    <svg class="search-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg>
+                    <input type="search" id="header-search" class="input input-search" placeholder="Search products by brand, category, style...">
+                </div>
+
+                <div class="header-actions">
+                    <button class="btn btn-ghost btn-icon" onclick="showPage('profile'); return false;" title="My Profile">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                        </svg>
+                    </button>
+
+                    <button class="btn btn-ghost btn-icon" style="position:relative" onclick="showPage('wishlist'); return false;" title="Wishlist">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+                        </svg>
+                        <span class="badge-counter wishlist-count" id="wishlist-badge" style="display:none">0</span>
+                    </button>
+
+                    <button class="btn btn-ghost btn-icon" style="position:relative" onclick="showPage('cart'); return false;" title="Cart">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+                            <line x1="3" y1="6" x2="21" y2="6" />
+                            <path d="M16 10a4 4 0 01-8 0" />
+                        </svg>
+                        <span class="badge-counter" id="cart-badge" style="display:none">0</span>
+                    </button>
+
+                    <button class="btn btn-ghost btn-icon" id="menu-toggle" onclick="toggleMobileMenu()" style="display:none" title="Menu">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <line x1="3" y1="12" x2="21" y2="12" />
+                            <line x1="3" y1="6" x2="21" y2="6" />
+                            <line x1="3" y1="18" x2="21" y2="18" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Dropdown Menu -->
+            <div class="mobile-menu" id="mobile-menu">
+                <nav class="mobile-nav">
+                    <a href="#" class="mobile-nav-link" onclick="showPage('shop'); closeMobileMenu(); return false;">Shop All</a>
+                    <a href="#" class="mobile-nav-link" onclick="showPage('shop', 'new'); closeMobileMenu(); return false;">New Arrivals</a>
+                    <a href="#" class="mobile-nav-link" onclick="showPage('shop', 'sale'); closeMobileMenu(); return false;">Sale</a>
+                    <a href="#" class="mobile-nav-link" onclick="showPage('profile'); closeMobileMenu(); return false;">My Account & Profile</a>
+                    <a href="#" class="mobile-nav-link" onclick="showPage('wishlist'); closeMobileMenu(); return false;">My Wishlist</a>
+                    <a href="#" class="mobile-nav-link" onclick="showPage('cart'); closeMobileMenu(); return false;">Shopping Cart</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Views Container -->
+    <main id="main-content">
+        <!-- Home View -->
+        <div id="page-home" class="page-view active">
+            <!-- Hero Banner -->
+            <section class="hero">
+                <div class="hero-bg"></div>
+                <div class="hero-overlay"></div>
+                <div class="hero-content container">
+                    <div class="hero-text">
+                        <span class="hero-badge">New Collection 2024</span>
+                        <h1 class="hero-title">Discover Your<br>Unique Style</h1>
+                        <p class="hero-desc">Explore our curated collection of premium fashion pieces designed for the modern lifestyle.</p>
+                        <div class="hero-buttons">
+                            <button class="btn btn-primary btn-lg" onclick="showPage('shop')">
+                                Shop Now
+                                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <line x1="5" y1="12" x2="19" y2="12" />
+                                    <polyline points="12 5 19 12 12 19" />
+                                </svg>
+                            </button>
+                            <button class="btn btn-hero-outline btn-lg" onclick="showPage('shop', 'new')">New Arrivals</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Categories -->
+            <section class="section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">Shop by Category</h2>
+                        <p class="section-desc">Explore our diverse range of products tailored to match your lifestyle</p>
+                    </div>
+                    <div class="categories-grid" id="categories-grid"></div>
+                </div>
+            </section>
+
+            <!-- Featured Products -->
+            <section class="section" style="background: var(--secondary);">
+                <div class="container">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:2.5rem;">
+                        <div>
+                            <h2 class="section-title" style="text-align:left; margin-bottom:0.25rem;">Featured Products</h2>
+                            <p class="section-desc" style="margin:0; text-align:left;">Handpicked favorites from our latest collection</p>
+                        </div>
+                    </div>
+                    <div class="products-grid" id="featured-products"></div>
+                    <div style="text-align:center; margin-top:2.5rem;">
+                        <button class="btn btn-primary btn-lg" onclick="showPage('shop')" style="border-radius: 9999px;">
+                            View All Products
+                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                                <polyline points="12 5 19 12 12 19" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Promo Banner -->
+            <section class="section">
+                <div class="container">
+                    <div class="promo-banner">
+                        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200&h=500&fit=crop" alt="Sale Promo">
+                        <div class="promo-overlay"></div>
+                        <div class="promo-content">
+                            <div class="container">
+                                <div class="promo-text">
+                                    <span class="promo-badge">Limited Time Offer</span>
+                                    <h2 class="promo-title">Up to 50% Off</h2>
+                                    <p class="promo-desc">Don't miss out on our biggest sale of the season. Use promo code <strong>STYLES50</strong> for extra savings.</p>
+                                    <button class="btn btn-primary btn-lg" onclick="showPage('shop', 'sale')">
+                                        Shop Sale
+                                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                            <line x1="5" y1="12" x2="19" y2="12" />
+                                            <polyline points="12 5 19 12 12 19" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Bar -->
+            <section class="container">
+                <div class="features-bar">
+                    <div class="feature">
+                        <div class="feature-title">Free Shipping</div>
+                        <div class="feature-desc">On all orders over $100</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-title">Easy Returns</div>
+                        <div class="feature-desc">30-day hassle-free return policy</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-title">Secure Payment</div>
+                        <div class="feature-desc">100% encrypted checkout</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-title">24/7 Support</div>
+                        <div class="feature-desc">Dedicated customer care team</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Shop Catalog View -->
+        <div id="page-shop" class="page-view">
+            <div class="container section">
+                <div class="page-header">
+                    <h1 class="page-title" id="shop-title">All Products</h1>
+                    <p class="page-subtitle"><span id="product-count">0</span> products found</p>
+                </div>
+
+                <div class="shop-layout">
+                    <!-- Desktop Filter Sidebar -->
+                    <aside class="shop-sidebar">
+                        <div class="filters-header">
+                            <h2 class="filters-title">Filters</h2>
+                            <button class="btn btn-ghost" onclick="clearFilters()" style="font-size:0.85rem; padding:0.25rem 0.5rem;">
+                                Clear All
+                            </button>
+                        </div>
+
+                        <!-- Brand Filter -->
+                        <div class="filter-section">
+                            <button class="filter-toggle" onclick="toggleFilter(this)">
+                                Brand
+                                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <polyline points="18 15 12 9 6 15" />
+                                </svg>
+                            </button>
+                            <div class="filter-content" id="brand-filters"></div>
+                        </div>
+
+                        <!-- Price Filter -->
+                        <div class="filter-section">
+                            <button class="filter-toggle" onclick="toggleFilter(this)">
+                                Max Price
+                                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <polyline points="18 15 12 9 6 15" />
+                                </svg>
+                            </button>
+                            <div class="filter-content">
+                                <div class="price-range">
+                                    <input type="range" class="price-slider" min="0" max="500" value="500" id="price-slider" oninput="updatePriceFilter(this.value)">
+                                    <div class="price-labels">
+                                        <span>$0</span>
+                                        <span id="price-max">$500</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Clothing Size Filter -->
+                        <div class="filter-section">
+                            <button class="filter-toggle" onclick="toggleFilter(this)">
+                                Clothing Size
+                                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <polyline points="18 15 12 9 6 15" />
+                                </svg>
+                            </button>
+                            <div class="filter-content">
+                                <div class="size-grid" id="clothing-sizes"></div>
+                            </div>
+                        </div>
+
+                        <!-- Shoe Size Filter -->
+                        <div class="filter-section">
+                            <button class="filter-toggle" onclick="toggleFilter(this)">
+                                Shoe Size
+                                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <polyline points="18 15 12 9 6 15" />
+                                </svg>
+                            </button>
+                            <div class="filter-content">
+                                <div class="size-grid" id="shoe-sizes"></div>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <!-- Main Products Grid -->
+                    <div class="shop-main">
+                        <div class="shop-toolbar">
+                            <button class="btn btn-outline" onclick="openFilterSheet()" style="display:none;" id="mobile-filter-btn">
+                                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <line x1="4" y1="21" x2="4" y2="14" />
+                                    <line x1="4" y1="10" x2="4" y2="3" />
+                                    <line x1="12" y1="21" x2="12" y2="12" />
+                                    <line x1="12" y1="8" x2="12" y2="3" />
+                                    <line x1="20" y1="21" x2="20" y2="16" />
+                                    <line x1="20" y1="12" x2="20" y2="3" />
+                                </svg>
+                                Filters
+                            </button>
+                            <div class="active-filters" id="active-filters"></div>
+                            <select class="select" id="sort-select" onchange="sortProducts(this.value)">
+                                <option value="featured">Sort by: Featured</option>
+                                <option value="newest">Sort by: Newest</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                                <option value="rating">Top Rated</option>
+                            </select>
+                        </div>
+
+                        <div class="products-grid" id="shop-products"></div>
+                        <div class="pagination" id="pagination"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Detail View -->
+        <div id="page-product" class="page-view">
+            <div class="container section">
+                <div class="breadcrumbs">
+                    <a href="#" onclick="showPage('home'); return false;">Home</a>
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                    <a href="#" onclick="showPage('shop'); return false;">Shop</a>
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                    <span id="breadcrumb-product">Product</span>
+                </div>
+
+                <div class="product-detail">
+                    <div class="product-gallery">
+                        <div class="main-image">
+                            <img id="main-product-image" src="" alt="Main Product View">
+                        </div>
+                        <div class="thumbnail-grid" id="product-thumbnails"></div>
+                    </div>
+
+                    <div class="product-detail-info">
+                        <div>
+                            <p class="detail-brand" id="detail-brand">Brand</p>
+                            <h1 class="detail-title" id="detail-title">Product Name</h1>
+                            <div class="detail-rating">
+                                <div class="stars" id="detail-stars"></div>
+                                <span class="rating-text" id="detail-rating-text">4.5 (100 reviews)</span>
+                            </div>
+                        </div>
+
+                        <div class="detail-price">
+                            <span class="detail-price-current" id="detail-price">$0</span>
+                            <span class="detail-price-original" id="detail-original-price"></span>
+                        </div>
+
+                        <p class="detail-desc" id="detail-desc">Product description</p>
+
+                        <div class="color-selector">
+                            <label>Color: <span id="selected-color-name">White</span></label>
+                            <div class="color-options" id="color-options"></div>
+                        </div>
+
+                        <div class="size-selector">
+                            <label>Size</label>
+                            <select class="size-select" id="size-select">
+                                <option value="">Select size</option>
+                            </select>
+                        </div>
+
+                        <div class="quantity-selector">
+                            <label>Quantity</label>
+                            <div class="quantity-controls">
+                                <button class="qty-btn" onclick="changeQuantity(-1)">-</button>
+                                <span class="qty-value" id="quantity-value">1</span>
+                                <button class="qty-btn" onclick="changeQuantity(1)">+</button>
+                            </div>
+                        </div>
+
+                        <div class="detail-actions">
+                            <button class="btn btn-primary btn-lg" onclick="addToCartFromDetail()">Add to Cart</button>
+                            <button class="btn btn-outline btn-lg btn-icon" onclick="toggleWishlist(currentProduct.id)" id="favorite-btn" title="Add to Wishlist">
+                                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div class="detail-features">
+                            <div class="detail-feature">
+                                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <rect x="1" y="3" width="15" height="13" />
+                                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+                                    <circle cx="5.5" cy="18.5" r="2.5" />
+                                    <circle cx="18.5" cy="18.5" r="2.5" />
+                                </svg>
+                                <span>Free Shipping</span>
+                            </div>
+                            <div class="detail-feature">
+                                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <polyline points="23 4 23 10 17 10" />
+                                    <polyline points="1 20 1 14 7 14" />
+                                    <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15" />
+                                </svg>
+                                <span>30-Day Returns</span>
+                            </div>
+                            <div class="detail-feature">
+                                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                </svg>
+                                <span>100% Authentic</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="tabs">
+                    <div class="tab-list">
+                        <button class="tab-btn active" onclick="switchTab(this, 'description')">Description</button>
+                        <button class="tab-btn" onclick="switchTab(this, 'specifications')">Specifications</button>
+                        <button class="tab-btn" onclick="switchTab(this, 'reviews')">Reviews</button>
+                    </div>
+                    <div class="tab-content active" id="tab-description">
+                        <p id="tab-desc-content">Product description content.</p>
+                    </div>
+                    <div class="tab-content" id="tab-specifications">
+                        <div class="specs-grid" id="specs-grid"></div>
+                    </div>
+                    <div class="tab-content" id="tab-reviews">
+                        <div style="text-align:center; padding:2.5rem 0;">
+                            <svg width="48" height="48" fill="none" stroke="var(--muted)" stroke-width="2" viewBox="0 0 24 24" style="margin:0 auto 1rem;">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            <p style="font-weight:600; margin-bottom:0.5rem;">Verified Customer Ratings</p>
+                            <p style="color:var(--muted);">All reviews are verified purchases from confirmed StyleSphere customers.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Related Products -->
+                <section style="margin-top:4rem;">
+                    <h2 class="section-title" style="text-align:left; margin-bottom:1.5rem;">You May Also Like</h2>
+                    <div class="products-grid" id="related-products"></div>
+                </section>
+            </div>
+        </div>
+
+        <!-- User Profile View -->
+        <div id="page-profile" class="page-view">
+            <div class="container section">
+                <div class="profile-header-card card" style="padding: 2rem; margin-bottom: 2rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;">
+                    <div style="width: 5rem; height: 5rem; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 700;">
+                        AM
+                    </div>
+                    <div style="flex: 1; min-width: 200px;">
+                        <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+                            <h1 style="font-size: 1.75rem; font-weight: 700; margin: 0;" id="profile-display-name">Alex Morgan</h1>
+                            <span class="badge badge-primary">Gold Member</span>
+                        </div>
+                        <p style="color: var(--muted); margin: 0.25rem 0 0;" id="profile-display-email">alex.morgan@example.com • Member since Jan 2024</p>
+                    </div>
+                </div>
+
+                <div class="profile-layout" style="display: grid; gap: 2rem;">
+                    <!-- Account Personal Settings -->
+                    <div class="card" style="padding: 1.5rem;">
+                        <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1.25rem;">Personal Details & Address</h2>
+                        
+                        <form onsubmit="saveProfileDetails(event)">
+                            <div class="form-grid form-grid-2">
+                                <div>
+                                    <label class="label">First Name</label>
+                                    <input type="text" id="profile-fname" class="input" value="Alex" required>
+                                </div>
+                                <div>
+                                    <label class="label">Last Name</label>
+                                    <input type="text" id="profile-lname" class="input" value="Morgan" required>
+                                </div>
+                            </div>
+                            <div class="form-grid form-grid-2" style="margin-top: 1rem;">
+                                <div>
+                                    <label class="label">Email Address</label>
+                                    <input type="email" id="profile-email-input" class="input" value="alex.morgan@example.com" required>
+                                </div>
+                                <div>
+                                    <label class="label">Phone Number</label>
+                                    <input type="tel" id="profile-phone" class="input" value="+1 (555) 234-5678" required>
+                                </div>
+                            </div>
+                            <div class="form-grid" style="margin-top: 1rem;">
+                                <div>
+                                    <label class="label">Default Shipping Address</label>
+                                    <input type="text" id="profile-address" class="input" value="742 Evergreen Terrace, Suite 100, New York, NY 10001">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="margin-top: 1.5rem;">Save Account Changes</button>
+                        </form>
+                    </div>
+
+                    <!-- Order History Section -->
+                    <div class="card" style="padding: 1.5rem;">
+                        <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1.25rem;">Recent Order History</h2>
+                        
+                        <div class="order-history-list" style="display: flex; flex-direction: column; gap: 1rem;">
+                            <div style="border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; background: var(--background);">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+                                    <div>
+                                        <span style="font-weight: 700; font-size: 1rem;">Order #ORD-9482</span>
+                                        <span style="color: var(--muted); font-size: 0.875rem; margin-left: 0.75rem;">Placed on Sept 10, 2026</span>
+                                    </div>
+                                    <span class="badge badge-primary" style="background: var(--success);">Delivered</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.875rem; color: var(--muted);">
+                                    <span>2 Items • Classic White Sneakers (White / 42), Denim Jacket (Blue / L)</span>
+                                    <span style="font-weight: 700; color: var(--foreground); font-size: 1rem;">$219.98</span>
+                                </div>
+                            </div>
+
+                            <div style="border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; background: var(--background);">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+                                    <div>
+                                        <span style="font-weight: 700; font-size: 1rem;">Order #ORD-8219</span>
+                                        <span style="color: var(--muted); font-size: 0.875rem; margin-left: 0.75rem;">Placed on Aug 28, 2026</span>
+                                    </div>
+                                    <span class="badge badge-primary" style="background: var(--success);">Delivered</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.875rem; color: var(--muted);">
+                                    <span>1 Item • Minimalist Watch (Silver / One Size)</span>
+                                    <span style="font-weight: 700; color: var(--foreground); font-size: 1rem;">$199.99</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wishlist View (Creative Liberty) -->
+        <div id="page-wishlist" class="page-view">
+            <div class="container section">
+                <h1 class="page-title" style="margin-bottom:2rem;">My Wishlist</h1>
+
+                <div id="wishlist-empty" class="empty-state" style="display:none;">
+                    <div class="empty-state-icon">
+                        <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+                        </svg>
+                    </div>
+                    <h2>Your wishlist is empty</h2>
+                    <p>Save items you love by clicking the heart icon on any product.</p>
+                    <button class="btn btn-primary" onclick="showPage('shop')">Explore Shop</button>
+                </div>
+
+                <div class="wishlist-grid" id="wishlist-grid"></div>
+            </div>
+        </div>
+
+        <!-- Cart View -->
+        <div id="page-cart" class="page-view">
+            <div class="container section">
+                <h1 class="page-title" style="margin-bottom:2rem;">Shopping Cart</h1>
+
+                <div id="cart-empty" class="empty-state" style="display:none;">
+                    <div class="empty-state-icon">
+                        <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+                            <line x1="3" y1="6" x2="21" y2="6" />
+                            <path d="M16 10a4 4 0 01-8 0" />
+                        </svg>
+                    </div>
+                    <h2>Your cart is currently empty</h2>
+                    <p>Looks like you haven't added any fashion items to your shopping bag yet.</p>
+                    <button class="btn btn-primary" onclick="showPage('shop')">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <line x1="19" y1="12" x2="5" y2="12" />
+                            <polyline points="12 19 5 12 12 5" />
+                        </svg>
+                        Continue Shopping
+                    </button>
+                </div>
+
+                <div id="cart-content" class="cart-layout">
+                    <div>
+                        <div class="cart-items" id="cart-items"></div>
+                        <a href="#" class="continue-shopping" onclick="showPage('shop'); return false;">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <line x1="19" y1="12" x2="5" y2="12" />
+                                <polyline points="12 19 5 12 12 5" />
+                            </svg>
+                            Continue Shopping
+                        </a>
+                    </div>
+
+                    <!-- Order Summary Box -->
+                    <div class="order-summary">
+                        <h2 class="summary-title">Order Summary</h2>
+                        <div class="summary-row">
+                            <span>Subtotal (<span id="summary-item-count">0</span> items)</span>
+                            <span id="summary-subtotal">$0.00</span>
+                        </div>
+
+                        <div class="summary-row discount-row" id="summary-discount-row" style="display:none;">
+                            <span>Promo Discount</span>
+                            <span id="summary-discount-value">-$0.00</span>
+                        </div>
+
+                        <div class="summary-row">
+                            <span>Shipping</span>
+                            <span id="summary-shipping">$0.00</span>
+                        </div>
+                        <p class="free-shipping-note" id="free-shipping-note" style="display:none;"></p>
+
+                        <!-- Promo Code Input (Creative Liberty) -->
+                        <form class="coupon-box" onsubmit="applyCouponCode(event)">
+                            <input type="text" id="coupon-input" class="input" placeholder="Promo code (e.g. STYLES50)">
+                            <button type="submit" class="btn btn-outline">Apply</button>
+                        </form>
+
+                        <div class="summary-divider"></div>
+                        <div class="summary-total">
+                            <span>Total</span>
+                            <span id="summary-total">$0.00</span>
+                        </div>
+
+                        <button class="btn btn-primary btn-lg summary-btn" onclick="showPage('checkout')">Proceed to Checkout</button>
+                        <p class="summary-note">Encrypted & Secure 256-Bit Payment Processing</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Checkout View -->
+        <div id="page-checkout" class="page-view">
+            <div class="container">
+                <div class="checkout-header">
+                    <a href="#" class="logo" onclick="showPage('home'); return false;">
+                        <span class="logo-icon">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+                                <line x1="3" y1="6" x2="21" y2="6" />
+                                <path d="M16 10a4 4 0 01-8 0" />
+                            </svg>
+                        </span>
+                        StyleSphere
+                    </a>
+                    <div class="secure-badge">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                            <path d="M7 11V7a5 5 0 0110 0v4" />
+                        </svg>
+                        Secure 256-bit Checkout
+                    </div>
+                </div>
+
+                <h1 class="page-title" style="margin:2rem 0;">Checkout</h1>
+
+                <div id="checkout-empty" style="display:none; text-align:center; padding:4rem 0;">
+                    <h2 style="margin-bottom:1rem;">Your cart is empty</h2>
+                    <button class="btn btn-primary" onclick="showPage('shop')">Continue Shopping</button>
+                </div>
+
+                <div id="checkout-content" class="checkout-layout">
+                    <!-- Accordion Steps -->
+                    <div class="accordion">
+                        <!-- Step 1: Shipping -->
+                        <div class="accordion-item" id="accordion-shipping">
+                            <button class="accordion-trigger" type="button">
+                                <div class="accordion-trigger-left">
+                                    <span class="step-number active" id="step-1">1</span>
+                                    <span class="step-title">Shipping Address</span>
+                                </div>
+                            </button>
+                            <div class="accordion-content active" id="content-shipping">
+                                <form onsubmit="completeShipping(event)">
+                                    <div class="form-grid form-grid-2">
+                                        <div>
+                                            <label class="label">First Name</label>
+                                            <input type="text" class="input" required placeholder="John">
+                                        </div>
+                                        <div>
+                                            <label class="label">Last Name</label>
+                                            <input type="text" class="input" required placeholder="Doe">
+                                        </div>
+                                    </div>
+                                    <div class="form-grid form-grid-2" style="margin-top:1rem;">
+                                        <div>
+                                            <label class="label">Email Address</label>
+                                            <input type="email" class="input" required placeholder="john@example.com">
+                                        </div>
+                                        <div>
+                                            <label class="label">Phone Number</label>
+                                            <input type="tel" class="input" required placeholder="+1 (555) 000-0000">
+                                        </div>
+                                    </div>
+                                    <div class="form-grid" style="margin-top:1rem;">
+                                        <div>
+                                            <label class="label">Street Address</label>
+                                            <input type="text" class="input" required placeholder="123 Fashion Blvd, Suite 400">
+                                        </div>
+                                    </div>
+                                    <div class="form-grid form-grid-3" style="margin-top:1rem;">
+                                        <div>
+                                            <label class="label">City</label>
+                                            <input type="text" class="input" required placeholder="New York">
+                                        </div>
+                                        <div>
+                                            <label class="label">State</label>
+                                            <input type="text" class="input" required placeholder="NY">
+                                        </div>
+                                        <div>
+                                            <label class="label">ZIP Code</label>
+                                            <input type="text" class="input" required placeholder="10001">
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary" style="margin-top:1.5rem;">Continue to Payment</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Payment -->
+                        <div class="accordion-item" id="accordion-payment">
+                            <button class="accordion-trigger" type="button">
+                                <div class="accordion-trigger-left">
+                                    <span class="step-number pending" id="step-2">2</span>
+                                    <span class="step-title">Payment Method</span>
+                                </div>
+                            </button>
+                            <div class="accordion-content" id="content-payment">
+                                <form onsubmit="completePayment(event)">
+                                    <div class="form-grid">
+                                        <div>
+                                            <label class="label">Card Number</label>
+                                            <input type="text" class="input" placeholder="4532 •••• •••• 8892" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-grid form-grid-3" style="margin-top:1rem;">
+                                        <div style="grid-column: span 2;">
+                                            <label class="label">Expiry Date</label>
+                                            <input type="text" class="input" placeholder="MM / YY" required>
+                                        </div>
+                                        <div>
+                                            <label class="label">CVC / CVV</label>
+                                            <input type="text" class="input" placeholder="123" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-grid" style="margin-top:1rem;">
+                                        <div>
+                                            <label class="label">Cardholder Name</label>
+                                            <input type="text" class="input" placeholder="John Doe" required>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary" style="margin-top:1.5rem;">Continue to Review</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Review -->
+                        <div class="accordion-item" id="accordion-review">
+                            <button class="accordion-trigger" type="button">
+                                <div class="accordion-trigger-left">
+                                    <span class="step-number pending" id="step-3">3</span>
+                                    <span class="step-title">Order Review</span>
+                                </div>
+                            </button>
+                            <div class="accordion-content" id="content-review">
+                                <div class="checkout-items" id="checkout-items"></div>
+                                <div class="summary-divider"></div>
+                                <button class="btn btn-primary btn-lg" style="width:100%;" onclick="placeOrder()">Place Order Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Checkout Order Summary Sidebar -->
+                    <div class="order-summary">
+                        <h2 class="summary-title">Order Breakdown</h2>
+                        <div class="checkout-items" id="checkout-summary-items" style="margin-bottom:1rem;"></div>
+                        <div class="summary-divider"></div>
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span id="checkout-subtotal">$0.00</span>
+                        </div>
+                        <div class="summary-row discount-row" id="checkout-discount-row" style="display:none;">
+                            <span>Discount</span>
+                            <span id="checkout-discount-value">-$0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Shipping</span>
+                            <span id="checkout-shipping">$0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Estimated Tax</span>
+                            <span id="checkout-tax">$0.00</span>
+                        </div>
+                        <div class="summary-divider"></div>
+                        <div class="summary-total">
+                            <span>Grand Total</span>
+                            <span id="checkout-total">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" id="main-footer">
+        <div class="container footer-inner">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo" onclick="showPage('home'); return false;">
+                        <span class="logo-icon">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+                                <line x1="3" y1="6" x2="21" y2="6" />
+                                <path d="M16 10a4 4 0 01-8 0" />
+                            </svg>
+                        </span>
+                        StyleSphere
+                    </a>
+                    <p class="footer-desc">Discover the latest trends in fashion. Quality meets style at StyleSphere with handcrafted fashion pieces tailored for modern expression.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" title="Facebook"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+                        <a href="#" class="social-link" title="Twitter"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg></a>
+                        <a href="#" class="social-link" title="Instagram"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" fill="none" stroke="currentColor" stroke-width="2"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2"/></svg></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="footer-title">Shop</h3>
+                    <nav class="footer-links">
+                        <a href="#" class="footer-link" onclick="showPage('shop', 'men'); return false;">Men's Apparel</a>
+                        <a href="#" class="footer-link" onclick="showPage('shop', 'women'); return false;">Women's Collection</a>
+                        <a href="#" class="footer-link" onclick="showPage('shop', 'accessories'); return false;">Accessories</a>
+                        <a href="#" class="footer-link" onclick="showPage('shop', 'shoes'); return false;">Footwear & Shoes</a>
+                        <a href="#" class="footer-link" onclick="showPage('shop', 'new'); return false;">New Arrivals</a>
+                        <a href="#" class="footer-link" onclick="showPage('shop', 'sale'); return false;">Sale & Clearance</a>
+                    </nav>
+                </div>
+                <div>
+                    <h3 class="footer-title">Company</h3>
+                    <nav class="footer-links">
+                        <a href="#" class="footer-link">About StyleSphere</a>
+                        <a href="#" class="footer-link">Careers</a>
+                        <a href="#" class="footer-link">Press & Media</a>
+                        <a href="#" class="footer-link">Sustainability</a>
+                    </nav>
+                </div>
+                <div>
+                    <h3 class="footer-title">Support</h3>
+                    <nav class="footer-links">
+                        <a href="#" class="footer-link">Contact Support</a>
+                        <a href="#" class="footer-link">Help & FAQs</a>
+                        <a href="#" class="footer-link">Shipping & Delivery</a>
+                        <a href="#" class="footer-link">Returns & Exchange</a>
+                        <a href="#" class="footer-link">Size Guide</a>
+                    </nav>
+                </div>
+                <div>
+                    <h3 class="footer-title">Newsletter</h3>
+                    <p style="font-size:0.875rem; color:var(--muted); margin-bottom:1rem;">Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals.</p>
+                    <form class="newsletter-form" onsubmit="event.preventDefault(); showToast('Subscribed to newsletter successfully!', 'success');">
+                        <input type="email" class="input" placeholder="Enter your email" required>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">© 2024 StyleSphere Inc. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Security</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Filter Sheet (Mobile Drawer) -->
+    <div class="filter-sheet" id="filter-sheet">
+        <div class="filter-sheet-overlay" onclick="closeFilterSheet()"></div>
+        <div class="filter-sheet-content">
+            <div class="filter-sheet-header">
+                <h2 class="filters-title">Filters</h2>
+                <button class="btn btn-ghost btn-icon" onclick="closeFilterSheet()">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
+            <div id="mobile-filters"></div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Custom Script -->
+    <script src="script.js"></script>
+</body>
+
+</html>
